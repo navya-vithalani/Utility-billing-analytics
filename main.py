@@ -1,5 +1,6 @@
 import csv
-from billing import calculate_bill
+from src.billing import calculate_bill
+from src.utils import format_currency, separator
 
 
 print("Reading customer data and calculating bills...\n")
@@ -8,7 +9,7 @@ print("Reading customer data and calculating bills...\n")
 try:
 
     print(f"{'Customer':^20}| {'Units(kWh)':^10} | {'Bill':^12}")
-    print("-" * 50)
+    separator(50, "-")
 
     with open("data/customers.csv", mode="r", newline="", encoding="utf-8") as file:
 
@@ -53,7 +54,7 @@ try:
             except ValueError as error:
 
                 print(f"Error for customer {name}: Units cannot be negative.")
-                print("." * 50)
+                separator(50, ".")
 
                 continue
 

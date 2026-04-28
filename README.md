@@ -1,13 +1,15 @@
-# Utility Billing Analytics - Day 3
+# Utility Billing Analytics - Day 4
 
 ## Objective
-Implemented CSV-based multiple customer billing and data processing.
+Built a modular Python-based utility billing system that calculates electricity bills using slab-based pricing, processes multiple customers from CSV files, and generates structured output in the terminal. Structured folders and files for accessibility and ease of modifications.
 
 ## Features
-- Reads customer data from CSV file
-- Calculates bills for multiple customers
-- Error handling for missing files and invalid data
+- Reads customer data from CSV file & calculates bill
+- Handles errors for missing files and invalid data
 - f-string formatting in terminal to present data
+- Modular code structure (separation of logic, config, and execution)
+- Configurable rates and slab limits via `config.py`
+- basic test scripts for validation
 
 ## Configuration
 
@@ -28,11 +30,14 @@ Customer data is stored in a CSV file with the following fields:
 - Customer Name
 - Units Consumed
 
-## Files
+## Modules & Files
 
-- billing.py → contains billing logic
-- test.py → reads CSV data and processes customer bills
-- data/customers.csv → stores customer records
+- src → handles logic and reusable code. Contains billing.py(calculation) and utils.py(helper functions)
+- tests → contains multiple sample codes to test individual aspects of the project
+- data → contains csv and text files to be used for analysis
+- config.py → stores constant values like rates and slabs
+- main.py → flow of the app which runs the final output
+- .gitignore → to prevent Git from tracking, staging, or committing unnecessary files—like logs, build artifacts, or secret keys—keeping the repository clean and secure.
 
 ## Error Handling
 

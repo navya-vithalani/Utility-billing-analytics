@@ -1,15 +1,12 @@
-# Slab limits
-SLAB_1 = 100
-SLAB_2 = 300
+import config
 
-# Rates per unit
-RATE_1 = 5
-RATE_2 = 7
-RATE_EXTRA = 10
-
-# Fixed charge
-FIXED_CHARGE = 100
-
+# Constants for billing calculation
+SLAB_1 = config.SLAB_1
+SLAB_2 = config.SLAB_2  
+RATE_1 = config.RATE_1
+RATE_2 = config.RATE_2
+RATE_EXTRA = config.RATE_EXTRA
+FIXED_CHARGE = config.FIXED_CHARGE
 
 def calculate_bill(units):
 
