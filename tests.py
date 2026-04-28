@@ -1,27 +1,64 @@
+import csv
 from billing import calculate_bill
 
-#test 1
-units = 50
-bill_amt = calculate_bill(units)
-print(f"The total bill for {units} units (kWh) is ₹{bill_amt} based on a rate of ₹5/unit.")
 
-print("-" * 50)
+print("Reading customer data and calculating bills...\n")
 
-#test 2
-units = 250
-bill_amt = calculate_bill(units)
-print(f"The total bill for {units} units (kWh) is ₹{bill_amt} based on a rate of ₹5/unit for the first 100 units and ₹7/unit for the rest.")
 
-print("-" * 50)
+try:
 
-#test 3
-units = 450
-bill_amt = calculate_bill(units)
-print(f"The total bill for {units} units (kWh) is ₹{bill_amt} based on a rate of ₹5/unit for the first 100 units, ₹7/unit for the next 200 units, and ₹10/unit for additional units.")
+    print(f"{'Customer':^20}| {'Units(kWh)':^10} | {'Bill':^12}")
+    print("-" * 50)
 
-print("-" * 50)
+    with open("data/customers.csv", mode="r", newline="", encoding="utf-8") as file:
 
-#test 4
-units = -10
-bill_amt = calculate_bill(units)
-print(f"The total bill for {units} units (kWh) is {bill_amt}")
+        reader = csv.DictReader(file)
+
+        for row in reader:
+
+            name = row.get("Customer Name", "").strip()
+            units_str = row.get("Units Consumed", "").strip()
+
+
+            # Missing data check
+            if not name or not units_str:
+
+                print("Skipping invalid row: missing customer name or units.")
+                print("." * 50)
+
+                continue
+
+
+            # Integer conversion check
+            try:
+
+                units = int(units_str)
+
+            except ValueError:
+
+                print(f"Invalid unit format for customer: {name}")
+                print("." * 50)
+
+                continue
+
+
+            # Billing calculation check
+            try:
+
+                bill_amt = calculate_bill(units)
+
+                print(f"{name:^20}| {units:^10} | {'₹':>2}{bill_amt:.2f}")
+                print("." * 50)
+
+            except ValueError as error:
+
+                print(f"Error for customer {name}: Units cannot be negative.")
+                print("." * 50)
+
+                continue
+
+
+except FileNotFoundError:
+
+    print("Error: Customer file not found.")
+

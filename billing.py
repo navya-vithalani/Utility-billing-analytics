@@ -15,7 +15,7 @@ def calculate_bill(units):
 
     # Input validation
     if units < 0:
-        return "Invalid input: Units cannot be negative."
+        raise ValueError("Invalid input: Units cannot be negative.")
 
     # Slab calculation
     if units <= SLAB_1:
