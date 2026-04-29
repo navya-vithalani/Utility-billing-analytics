@@ -1,15 +1,15 @@
-# Utility Billing Analytics - Day 4
+# Utility Billing Analytics - Version 5
 
 ## Objective
-Built a modular Python-based utility billing system that calculates electricity bills using slab-based pricing, processes multiple customers from CSV files, and generates structured output in the terminal. Structured folders and files for accessibility and ease of modifications.
+Built a modular Python-based utility billing system that calculates electricity bills and generates insights based on the data provided.
 
 ## Features
 - Reads customer data from CSV file & calculates bill
 - Handles errors for missing files and invalid data
 - f-string formatting in terminal to present data
 - Modular code structure (separation of logic, config, and execution)
-- Configurable rates and slab limits via `config.py`
-- basic test scripts for validation
+- Presents analytics like average consumption, max/min bills, etc
+- Generates insights based on low, high, and medium usage customers
 
 ## Configuration
 
@@ -23,7 +23,7 @@ Built a modular Python-based utility billing system that calculates electricity 
 
 ₹100 (added to every bill)
 
-### Data Storage
+## Data Storage
 
 Customer data is stored in a CSV file with the following fields:
 
@@ -55,15 +55,27 @@ Displayed if name or units is not given
 
 ## Sample Outputs
 
-- Aarav Sharma → 47 units → ₹335.00
+-BASIC UTILITY BILLING ANALYTICS REPORT
+==================================================
 
-- Rahul Verma → 251 units → ₹1657.00
+-[ Revenue Analytics ]
+-Total Revenue           : ₹72070.00
+-Average Bill            : ₹1566.74
+--------------------------------------------------
 
-- Sneha Kapoor → 318 units → ₹2280.00
+-[ Consumption Analytics ]
+-Average Consumption     : 227.15 kWh
+-High Usage Customers    : 3
+-Medium Usage Customers  : 36
+-Low Usage Customers     : 7
+--------------------------------------------------
 
-### Error messages 
+-[ Billing Extremes ]
+-Highest Bill            : ₹4610.00 (Meera Joshi)
+-Lowest Bill             : ₹100.00 (Aisha Khan)
+--------------------------------------------------
 
-- negative values → Invalid data for customer 'Divya Thomas'. Skipping this entry.
-- Non-Interger → Invalid unit format for customer: Ananya Iyer
-- Missing value → Skipping invalid row: missing customer name or units.
-- Missing file → Error: Customer file not found.
+-[ System Insights ]
+-• Majority customers are medium usage consumers.
+
+============================================================

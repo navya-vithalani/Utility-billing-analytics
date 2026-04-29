@@ -1,65 +1,34 @@
-import csv
-from src.billing import calculate_bill
-from src.utils import format_currency, separator
+from src.analytics import generate_analytics
+from src.utils import separator
+
+data = generate_analytics("data/customers.csv")
 
 
-print("Reading customer data and calculating bills...\n")
+separator(60, "=")
+print("BASIC UTILITY BILLING ANALYTICS REPORT")
+separator(50, "=")
 
+print("\n[ Revenue Analytics ]")
+print(f"Total Revenue           : ₹{data['total_revenue']:.2f}")
+print(f"Average Bill            : ₹{data['average_bill']:.2f}")
 
-try:
+separator(50, "-")
 
-    print(f"{'Customer':^20}| {'Units(kWh)':^10} | {'Bill':^12}")
-    separator(50, "-")
+print("\n[ Consumption Analytics ]")
+print(f"Average Consumption     : {data['average_consumption']:.2f} kWh")
+print(f"High Usage Customers    : {data['high_usage']}")
+print(f"Medium Usage Customers  : {data['medium_usage']}")
+print(f"Low Usage Customers     : {data['low_usage']}")
 
-    with open("data/customers.csv", mode="r", newline="", encoding="utf-8") as file:
+separator(50, "-")
 
-        reader = csv.DictReader(file)
+print("\n[ Billing Extremes ]")
+print(f"Highest Bill            : ₹{data['highest_bill']:.2f} ({data['highest_customer']})")
+print(f"Lowest Bill             : ₹{data['lowest_bill']:.2f} ({data['lowest_customer']})")
 
-        for row in reader:
+separator(50, "-")
 
-            name = row.get("Customer Name", "").strip()
-            units_str = row.get("Units Consumed", "").strip()
+print("\n[ System Insights ]")
+print(f"• {data['insight1']}")
 
-
-            # Missing data check
-            if not name or not units_str:
-
-                print("Skipping invalid row: missing customer name or units.")
-                print("." * 50)
-
-                continue
-
-
-            # Integer conversion check
-            try:
-
-                units = int(units_str)
-
-            except ValueError:
-
-                print(f"Invalid unit format for customer: {name}")
-                print("." * 50)
-
-                continue
-
-
-            # Billing calculation check
-            try:
-
-                bill_amt = calculate_bill(units)
-
-                print(f"{name:^20}| {units:^10} | {'₹':>2}{bill_amt:.2f}")
-                print("." * 50)
-
-            except ValueError as error:
-
-                print(f"Error for customer {name}: Units cannot be negative.")
-                separator(50, ".")
-
-                continue
-
-
-except FileNotFoundError:
-
-    print("Error: Customer file not found.")
-
+print("\n" + "=" * 60)
