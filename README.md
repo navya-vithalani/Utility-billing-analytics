@@ -1,7 +1,7 @@
-# Utility Billing Analytics - Version 7
+# Utility Billing Analytics - Version 8
 
 ## Objective
-Built a modular Python-based utility billing system that calculates electricity bills based on taxes, discount, late penalty,etc. It also tracks due date, payment status, and alerts in case of overdue.
+Built a modular Python-based utility billing system that calculates electricity bills based on taxes, discount, late penalty,etc. It also tracks due date, payment status, and alerts in case of overdue. It also provides charts to present data effectively
 
 ## Features
 - Multi-column csv file to get varied data
@@ -10,6 +10,7 @@ Built a modular Python-based utility billing system that calculates electricity 
 - Modular code structure (separation of logic, config, and execution)
 - Presents analytics like average consumption, max/min bills, etc
 - Generates insights based on due date, payment status, and more
+- Creats multiple bar graphs and pie charts to analyse data
 
 ## Configuration
 
@@ -62,48 +63,32 @@ Displayed if name or units is not given
 
              UTILITY BILLING ANALYTICS REPORT
 
+{generates report with all data}
 
-[ Revenue Analytics ]
-- Total Revenue           : ₹230531.22
-- Average Bill            : ₹3073.75
-- Paid Revenue            : ₹104984.72
-- Pending Revenue         : ₹125546.50
+### Units vs Bill
+![Units vs Bill](reports/units_vs_bill.png)
 
-[ Consumption Analytics ]
-- Average Consumption     : 334.52 kWh
-- High Usage Customers    : 25
-- Medium Usage Customers  : 31
-- Low Usage Customers     : 19
-- Extreme Usage Customers : 2
+### Top 5 Customers
+![Top Customers](reports/top_5_customers.png)
 
-[ Billing Extremes ]
-- Highest Bill            : ₹10856.28
-- Highest Paying Customer : Rohan Bedi
-- Lowest Bill             : ₹190.28
-- Lowest Paying Customer  : Isha Malhotra
+### Customer Distribution
+![Customer Distribution](reports/customer_distribution.png)
 
-[ Payment Monitoring ]
-- Paid Customers          : 52
-- Pending Customers       : 23
-- Overdue Customers       : 23
+### Revenue by Customer Type
+![Revenue](reports/revenue_by_type.png)
 
-[ Customer Categories ]
-- Residential Customers   : 37
-- Commercial Customers    : 19
-- Industrial Customers    : 19
+### Payment Status
+![Payment Status](reports/payment_status.png)
 
-[ Tax, Discount, and Penalty Summary ]
-- Total Tax Collected    : ₹33117.57
-- Total Discounts Given  : ₹1654.35
-- Total Penalties Collected : ₹21.00
+### Usage Distribution
+![Usage](reports/usage_distribution.png)
 
-[ System Insights ]
-- • Majority customers are medium usage consumers.
-- • Most customers have completed payments.
-- • Industrial customers generate the highest revenue.
-- • There are 23 overdue customers who may require follow-up.
-- • The company is giving more discounts than it is collecting in penalties.
-- • The company has collected a total of ₹33117.57 in taxes.
-- • No rows were skipped due to data issues.
+### Paid vs Pending Revenue
+![Paid vs Pending Revenue](reports/paid_vs_pending_revenue.png)
 
-               END OF ANALYTICS REPORT
+### Tax, Discount, and Penalty Overview
+![Finance Overview](reports/finance_overview.png)
+
+### Revenue Share by Customer Type
+![Revenue Share](reports/revenue_share.png)
+

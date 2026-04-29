@@ -19,6 +19,9 @@ def generate_analytics(filepath):
     mid_usage = 0
     total_customers = 0
     skipped_rows = 0
+    all_units = []
+    all_bills = []
+    customer_bill_data = []
     
     # Initialize payment status counters
     paid_count = 0
@@ -93,6 +96,13 @@ def generate_analytics(filepath):
 
             total_bill = bill["total_bill"]
 
+            # accumulate units and bills
+            all_units.append(units)
+            all_bills.append(total_bill)
+            customer_bill_data.append(
+                {"name": name, "units": units,
+                 "total_bill": total_bill}
+            )
             # Accumulate totals and track highest/lowest bills
             total_revenue += total_bill
             total_units += units
@@ -156,6 +166,12 @@ def generate_analytics(filepath):
                (paid_revenue / total_revenue) * 100
                 if total_revenue > 0 else 0
             )
+
+            top_5_customers = sorted(
+              customer_bill_data,
+              key=lambda customer: customer["total_bill"],
+              reverse=True
+              )[:5]
 
     average_consumption = total_units / total_customers if total_customers > 0 else 0
     average_bill = total_revenue / total_customers if total_customers > 0 else 0
@@ -246,6 +262,10 @@ def generate_analytics(filepath):
         "total_tax_collected": round(total_tax_collected, 2),
         "total_discounts_given": round(total_discounts_given, 2),
         "total_penalties_collected": round(total_penalties_collected, 2),
+        "top_5_customers": top_5_customers,
+        "all_units": all_units,
+        "all_bills": all_bills,
+        "bill": customer_bill_data,
         "insight1": insight1,
         "insight2": insight2,
         "insight3": insight3,

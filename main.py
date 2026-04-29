@@ -1,6 +1,7 @@
 
 from src.analytics import generate_analytics
 from src.utils import separator
+from src.visualisations import create_visualizations
 
 data = generate_analytics("data/customers.csv")
 
@@ -80,3 +81,6 @@ print(f"• {data['insight8']}")
 separator(65, "=")
 print("               END OF ANALYTICS REPORT")
 separator(65, "=")
+
+data = generate_analytics("data/customers.csv")
+create_visualizations(data)
