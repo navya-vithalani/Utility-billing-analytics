@@ -1,16 +1,15 @@
-# Utility Billing Analytics - Version 6
+# Utility Billing Analytics - Version 7
 
 ## Objective
-Built a modular Python-based utility billing system that calculates electricity bills and generates insights based on the data provided. It also tracks due date, payment status, and alerts in case of overdue
+Built a modular Python-based utility billing system that calculates electricity bills based on taxes, discount, late penalty,etc. It also tracks due date, payment status, and alerts in case of overdue.
 
 ## Features
 - Multi-column csv file to get varied data
-- Reads customer data from CSV file & calculates bill
+- Reads customer data from CSV file, calculates bill, tax, discount, and penalty
 - Handles errors for missing files and invalid data
 - Modular code structure (separation of logic, config, and execution)
 - Presents analytics like average consumption, max/min bills, etc
 - Generates insights based on due date, payment status, and more
-- Removed tests folder to streamline process
 
 ## Configuration
 
@@ -60,45 +59,51 @@ Displayed if name or units is not given
 
 ## Sample Output
 
-=================================================================
+
              UTILITY BILLING ANALYTICS REPORT
-=================================================================
 
-###[ Revenue Analytics ]
-- Total Revenue           : ₹199047.00
-- Average Bill            : ₹2653.96
-- Paid Revenue            : ₹92102.00
-- Pending Revenue         : ₹106945.00
 
-###[ Consumption Analytics ]
+[ Revenue Analytics ]
+- Total Revenue           : ₹230531.22
+- Average Bill            : ₹3073.75
+- Paid Revenue            : ₹104984.72
+- Pending Revenue         : ₹125546.50
+
+[ Consumption Analytics ]
 - Average Consumption     : 334.52 kWh
 - High Usage Customers    : 25
 - Medium Usage Customers  : 31
 - Low Usage Customers     : 19
 - Extreme Usage Customers : 2
 
-###[ Billing Extremes ]
-- Highest Bill            : ₹9200.00
+[ Billing Extremes ]
+- Highest Bill            : ₹10856.28
 - Highest Paying Customer : Rohan Bedi
-- Lowest Bill             : ₹190.00
+- Lowest Bill             : ₹190.28
 - Lowest Paying Customer  : Isha Malhotra
 
-###[ Payment Monitoring ]
+[ Payment Monitoring ]
 - Paid Customers          : 52
 - Pending Customers       : 23
 - Overdue Customers       : 23
 
-###[ Customer Categories ]
+[ Customer Categories ]
 - Residential Customers   : 37
 - Commercial Customers    : 19
 - Industrial Customers    : 19
 
-###[ System Insights ]
+[ Tax, Discount, and Penalty Summary ]
+- Total Tax Collected    : ₹33117.57
+- Total Discounts Given  : ₹1654.35
+- Total Penalties Collected : ₹21.00
+
+[ System Insights ]
 - • Majority customers are medium usage consumers.
 - • Most customers have completed payments.
 - • Industrial customers generate the highest revenue.
 - • There are 23 overdue customers who may require follow-up.
+- • The company is giving more discounts than it is collecting in penalties.
+- • The company has collected a total of ₹33117.57 in taxes.
+- • No rows were skipped due to data issues.
 
-=================================================================
                END OF ANALYTICS REPORT
-=================================================================

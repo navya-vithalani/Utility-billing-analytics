@@ -1,4 +1,6 @@
 # Slab limits
+
+
 SLAB_1 = 100
 SLAB_2 = 300
 
@@ -16,3 +18,15 @@ LOW_USAGE_THRESHOLD = 100
 
 # Billing cycle
 DUE_DAY = 15
+PENALTY_RATE = 0.10  # 10% penalty for late payment
+MAX_PENALTY = 500  # Maximum penalty cap
+
+
+# taxes
+HIGH_TAX_RATE = 0.18
+LOW_TAX_RATE = 0.05
+TAX_THRESHOLD = 1000
+
+# Discount
+DISCOUNT_THRESHOLD = 2000
+DISCOUNT_RATE = 0.05  # 5% discount for bills below ₹2000
