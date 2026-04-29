@@ -1,4 +1,12 @@
+import sys
+from pathlib import Path
+
+# Add parent directory to path so config can be imported
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import config
+from datetime import date
+from config import DUE_DAY
 
 # Constants for billing calculation
 SLAB_1 = config.SLAB_1
@@ -38,3 +46,29 @@ def calculate_bill(units):
     bill_amt = energy_charge + FIXED_CHARGE
 
     return bill_amt
+
+
+
+def calculate_due_date(billing_month):
+
+    year, month = map(int, billing_month.split("-"))
+
+    # Move to next month
+    if month == 12:
+        year += 1
+        month = 1
+    else:
+        month += 1
+
+    due_date = date(year, month, DUE_DAY)
+
+    return due_date
+
+def get_days_late(due_date):
+
+    today = date.today()
+
+    days_late = (today - due_date).days
+
+    return max(days_late, 0)
+
