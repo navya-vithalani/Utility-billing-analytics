@@ -1,7 +1,13 @@
 from pathlib import Path
+import sys
 import csv
+
+# Add parent and current directory to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent))
+
 from config import HIGH_USAGE_THRESHOLD, LOW_USAGE_THRESHOLD
-from src.billing import calculate_total_bill, calculate_due_date, get_days_late
+from billing import calculate_total_bill, calculate_due_date, get_days_late
 
 def generate_analytics(filepath):
     
@@ -161,28 +167,29 @@ def generate_analytics(filepath):
             total_discounts_given += discount
             total_penalties_collected += penalty
 
-            # collection rate
-            collection_rate = (
-               (paid_revenue / total_revenue) * 100
-                if total_revenue > 0 else 0
-            )
+    # Calculate collection rate after loop
+    collection_rate = (
+        (paid_revenue / total_revenue) * 100
+        if total_revenue > 0 else 0
+    )
 
-            top_5_customers = sorted(
-              customer_bill_data,
-              key=lambda customer: customer["total_bill"],
-              reverse=True
-              )[:5]
+    # Get top 5 customers after loop
+    top_5_customers = sorted(
+        customer_bill_data,
+        key=lambda customer: customer["total_bill"],
+        reverse=True
+    )[:5]
 
     average_consumption = total_units / total_customers if total_customers > 0 else 0
     average_bill = total_revenue / total_customers if total_customers > 0 else 0
 
     # insight based on usage
     if high_usage > low_usage and high_usage > mid_usage:
-     insight1 = "Majority customers are high usage consumers."
+        insight1 = "Majority customers are high usage consumers."
     elif low_usage > high_usage and low_usage > mid_usage:
-     insight1 = "Majority customers are low usage consumers."
+        insight1 = "Majority customers are low usage consumers."
     else:
-     insight1 = "Majority customers are medium usage consumers."
+        insight1 = "Majority customers are medium usage consumers."
 
     # insight based on payment status
     if pending_count > paid_count:

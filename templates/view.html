@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}View Customers{% endblock %}
+<body class="view-page">
+{% block content %}
+
+<h2>Customer Records</h2>
+
+<table class="data-table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Units</th>
+        <th>Status</th>
+        <th>Type</th>
+    </tr>
+
+    {% for c in customers %}
+    <tr>
+        <td>{{ c.customer_id }}</td>
+        <td>{{ c.customer_name }}</td>
+        <td>{{ c.units_consumed }}</td>
+        <td>{{ c.payment_status }}</td>
+        <td>{{ c.customer_type }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+</body>

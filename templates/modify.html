@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Modify Customers{% endblock %}
+
+{% block content %}
+
+<h2 class="section-title">Modify Records</h2>
+<!-- ADD BUTTON -->
+<div class="button-container">
+
+    <button class="btn btn-success">
+        + Add New Customer
+    </button>
+
+</div>
+
+
+<div class="records-list">
+
+    {% for c in customers %}
+
+    <div class="record-item">
+
+        <div class="record-info">
+            <p class="record-name">{{ c.customer_name }}</p>
+            <p class="record-meta">
+                {{ c.customer_id }} • {{ c.customer_type }} • {{ c.units_consumed }} units
+            </p>
+        </div>
+
+        <div class="record-actions">
+
+            <button class="btn btn-warning">
+                Modify
+            </button>
+
+            <button class="btn btn-danger">
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<!-- ADD BUTTON -->
+<div class="button-container">
+
+    <button class="btn btn-success">
+        + Add New Customer
+    </button>
+
+</div>
+
+{% endblock %}

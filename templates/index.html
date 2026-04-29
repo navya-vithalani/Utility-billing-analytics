@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<div class="hero">
+
+    <p class="hero-subtitle">
+        Generate bills, analyse usage, and manage customers in one place.
+    </p>
+
+</div>
+
+<!-- GRID -->
+<div class="grid-container">
+
+    <!-- INTRO CARD -->
+    <div class="card">
+
+        <h3 class="card-title">About the Project</h3>
+
+        <p class="card-text">
+            A simulation system that calculates electricity bills using slab rates,
+            applies tax, discounts, penalties, and generates analytics dashboards.
+        </p>
+
+        <ul class="card-list">
+            <li>Billing engine with slabs</li>
+            <li>Customer analytics</li>
+            <li>Graph visualisation</li>
+            <li>Modify & manage records</li>
+        </ul>
+
+    </div>
+
+    <!-- BILL GENERATOR FORM -->
+    <div class="card">
+
+        <h3 class="card-title">Demo Bill Generator</h3>
+
+        <form method="POST" action="/generate-bill" class="form-group">
+
+            <input
+                type="number"
+                name="units"
+                placeholder="Units consumed"
+                class="form-input"
+                required
+            >
+
+            <input
+                type="month"
+                name="billing_month"
+                class="form-input"
+                required
+            >
+
+            <select name="customer_type" class="form-input">
+
+                <option>Residential</option>
+                <option>Commercial</option>
+                <option>Industrial</option>
+
+            </select>
+
+            <button class="btn btn-primary btn-full">
+                Generate Bill
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Billing System{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<header class="header">
+
+    <a href="/" class="logo">⚡ UTILITY BILLING SYSTEM ⚡</a>
+
+    <p class="subtitle">Analytics • Billing • Management Dashboard</p>
+
+</header>
+
+<nav class="nav">
+
+    <a href="/view">View</a>
+    <a href="/analyze">Analyse</a>
+    <a href="/modify">Modify</a>
+
+</nav>
+
+<main class="container">
+
+    {% block content %}{% endblock %}
+
+</main>
+
+</body>
+</html>
