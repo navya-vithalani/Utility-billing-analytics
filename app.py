@@ -102,9 +102,18 @@ def view_page():
             key=lambda x: x["customer_name"]
         )
 
+    # Toggle for showing inactive customers
+    show_inactive = request.args.get("show_inactive") is not None
+    if not show_inactive:
+        customers = [
+            customer for customer in customers
+            if customer.get("status", "Active") == "Active"
+        ]   
+
     return render_template(
         "view.html",
-        customers=customers
+        customers=customers,
+        show_inactive=show_inactive
     )
 
 # =========================
@@ -266,11 +275,11 @@ def edit_customer(customer_id):
     )
 
 
-@app.route("/delete/<customer_id>")
-def delete_customer(customer_id):
+@app.route("/deactivate/<customer_id>")
+def deactivate_customer(customer_id):
     updated_rows = []
 
-    # Read and filter out the customer to be deleted
+    # Read and filter out the customer to be deactivated
     with open(
         "data/customers.csv",
         "r",
@@ -278,8 +287,40 @@ def delete_customer(customer_id):
     ) as file:
         reader = csv.DictReader(file)
         for row in reader:
-            if row["customer_id"] != customer_id:
-                updated_rows.append(row)
+            if row["customer_id"] == customer_id:
+                row["status"] = "Inactive"
+            updated_rows.append(row)
+
+    # Write remaining customers back to CSV
+    with open(
+        "data/customers.csv",
+        "w",
+        newline="",
+        encoding="utf-8-sig"
+    ) as file:
+        fieldnames = updated_rows[0].keys()
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(updated_rows)
+
+    return redirect("/modify")
+
+
+@app.route("/activate/<customer_id>")
+def activate_customer(customer_id):
+    updated_rows = []
+
+    # Read and filter out the customer to be activated
+    with open(
+        "data/customers.csv",
+        "r",
+        encoding="utf-8-sig"
+    ) as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if row["customer_id"] == customer_id:
+                row["status"] = "Active"
+            updated_rows.append(row)
 
     # Write remaining customers back to CSV
     with open(

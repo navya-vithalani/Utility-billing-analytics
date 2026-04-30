@@ -28,7 +28,7 @@
 <!-- SEARCH & FILTER CARD -->
 <!-- ======================================== -->
 
-<div class="card">
+<div class="card" style="background: linear-gradient(135deg, #7dc1ee, #166faa);">
 
     <div class="card-header">
 
@@ -41,17 +41,9 @@
 
     <!-- SEARCH FORM -->
 
-    <form
-        method="GET"
-        class="grid form-grid-3"
-        style="
-            gap: 20px;
-            padding: 20px;
-        "
-    >
+    <form method="GET" class="search-filter-form">
 
         <!-- SEARCH INPUT -->
-
         <input
             type="text"
             name="search"
@@ -59,77 +51,46 @@
             class="form-input"
         >
 
-
         <!-- CUSTOMER TYPE FILTER -->
-
-        <select
-            name="type"
-            class="form-input"
-        >
-
-            <option value="">
-                All Types
-            </option>
-
-            <option value="Residential">
-                Residential
-            </option>
-
-            <option value="Commercial">
-                Commercial
-            </option>
-
-            <option value="Industrial">
-                Industrial
-            </option>
-
+        <select name="type" class="form-input">
+            <option value="">Filter by Type</option>
+            <option value="Residential">Residential</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Industrial">Industrial</option>
         </select>
-
 
         <!-- SORT OPTION -->
-
-        <select
-            name="sort"
-            class="form-input"
-        >
-
-            <option value="">
-                Sort By
-            </option>
-
-            <option value="name">
-                Name
-            </option>
-
-            <option value="units">
-                Highest Units
-            </option>
-
+        <select name="sort" class="form-input">
+            <option value="">Sort By</option>
+            <option value="name">Name</option>
+            <option value="units">Highest Units</option>
         </select>
+
+        <!-- SHOW INACTIVE TOGGLE -->
+        <div class="toggle-container">
+            <span class="toggle-label">Show Inactive Customers</span>
+            <label class="switch">
+                <input
+                    type="checkbox"
+                    name="show_inactive"
+                    id="show_inactive"
+                    value="true"
+                    {% if show_inactive %}checked{% endif %}
+                >
+                <span class="slider"></span>
+            </label>
+        </div>
+
 
 
         <!-- ACTION BUTTONS -->
-
-        <div
-            style="
-                display: flex;
-                gap: 10px;
-                margin-top: 10px;
-            "
-        >
-
+        <div class="form-actions">
             <!-- APPLY BUTTON -->
-
-            <button
-                type="submit"
-                class="btn btn-primary"
-            >
+            <button type="submit" class="btn btn-primary">
                 Apply
             </button>
 
-
             <!-- RESET BUTTON -->
-
             <button
                 type="button"
                 class="btn btn-secondary"
@@ -137,7 +98,6 @@
             >
                 Reset
             </button>
-
         </div>
 
     </form>
@@ -189,7 +149,7 @@
 
     {% for c in customers %}
 
-    <tr>
+    <tr class="{% if c.status != 'Active' %}inactive-row{% endif %}">
 
         <td>
             {{ c.customer_id }}
@@ -197,6 +157,10 @@
 
         <td>
             {{ c.customer_name }}
+
+            {% if c.status != 'Active' %}
+                <span class="status-badge">Deactivated</span>
+            {% endif %}
         </td>
 
         <td>

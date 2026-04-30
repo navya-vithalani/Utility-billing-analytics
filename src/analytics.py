@@ -29,6 +29,7 @@ def generate_analytics(filepath):
     mid_usage = 0
     total_customers = 0
     skipped_rows = 0
+    inactive_customers = 0
     all_units = []
     all_bills = []
     customer_bill_data = []
@@ -70,9 +71,10 @@ def generate_analytics(filepath):
             units = row.get("units_consumed", "").strip()
             payment_status = row.get("payment_status", "").strip()
             customer_type = row.get("customer_type", "").strip()
+            status = row.get("status", "").strip()
 
             # Skip rows with missing data
-            if not name or not units:
+            if not name or not units or not billing_month or not status or not payment_status or not customer_id:
                 skipped_rows += 1
                 continue
 
@@ -86,6 +88,11 @@ def generate_analytics(filepath):
             # Skip negative values
             if units < 0:
                 skipped_rows += 1
+                continue
+
+            # Skip inactive customers
+            if status != "Active":
+                inactive_customers += 1
                 continue
 
             # Calculate billing information
@@ -248,6 +255,12 @@ def generate_analytics(filepath):
     else:
         insight8 = f"The collection rate is weak at {collection_rate:.2f}%."
 
+    # Insight: Inactive customers
+    if inactive_customers > 0:
+        insight9 = f"There are {inactive_customers} inactive customers who may require re-engagement."
+    else:
+        insight9 = "No inactive customers at the moment."
+
     # =========================================================
     # RETURN ANALYTICS DICTIONARY
     # =========================================================
@@ -282,6 +295,8 @@ def generate_analytics(filepath):
         "all_units": all_units,
         "all_bills": all_bills,
         "bill": customer_bill_data,
+        "inactive_customers": inactive_customers,
+        "skipped_rows": skipped_rows,
         "insight1": insight1,
         "insight2": insight2,
         "insight3": insight3,
@@ -289,5 +304,6 @@ def generate_analytics(filepath):
         "insight5": insight5,
         "insight6": insight6,
         "insight7": insight7,
-        "insight8": insight8
+        "insight8": insight8,
+        "insight9": insight9
     }

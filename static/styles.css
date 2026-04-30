@@ -333,10 +333,48 @@ h2 {
         );
 }
 
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 16px;
+    margin-bottom: 18px;
+
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
 .card:hover {
     transform: translateY(-4px);
 
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.search-filter-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    padding: 24px;
+    background-color: linear-gradient(135deg, #7dc1ee, #166faa);
+}
+
+.search-filter-form .form-input {
+    width: 100%;
+    min-width: 0;
+}
+
+.search-filter-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    align-items: center;
+    grid-column: 1 / -1;
+    margin-top: 10px;
+}
+
+.search-filter-form .toggle-container {
+    margin: 0;
+    max-width: 280px;
 }
 
 .card-title {
@@ -456,6 +494,36 @@ tr:hover {
     background: #f1f5f9;
 
     transition: 0.2s;
+}
+
+
+/* Inactive row styling */
+.inactive-row {
+    opacity: 0.55;
+    background: #f8fafc;
+    transition: all 0.25s ease;
+}
+
+/* Hover = slightly alive again */
+.inactive-row:hover {
+    opacity: 0.85;
+}
+
+/* Badge */
+.status-badge {
+    margin-left: 8px;
+    padding: 2px 6px;
+    font-size: 11px;
+    border-radius: 999px;
+    background: #ef4444;
+    color: white;
+    opacity: 0;
+    transition: 0.2s ease;
+}
+
+/* Show badge only on hover */
+.inactive-row:hover .status-badge {
+    opacity: 1;
 }
 
 
@@ -584,6 +652,97 @@ button:active,
 }
 
 
+/* ========================= */
+/* TOGGLE SWITCH */
+/* ========================= */
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 220px;
+    margin: 0 auto 30px auto;
+    padding: 12px 18px;
+    
+    background: white;
+    backdrop-filter: blur(6px);
+
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.toggle-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* switch wrapper */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+/* hide ugly checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* slider base */
+.slider {
+    position: absolute;
+    cursor: pointer;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: #cbd5e1;
+    transition: 0.3s;
+
+    border-radius: 34px;
+}
+
+/* knob */
+.slider::before {
+    position: absolute;
+    content: "";
+
+    height: 20px;
+    width: 20px;
+
+    left: 3px;
+    bottom: 3px;
+
+    background-color: white;
+    transition: 0.3s;
+
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ON state */
+.switch input:checked + .slider {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+/* move knob */
+.switch input:checked + .slider::before {
+    transform: translateX(24px);
+}
+
+/* click effect */
+.slider:active::before {
+    transform: scale(0.9);
+}
+
+
 /* ======================================== */
 /* RECORDS LIST */
 /* ======================================== */
@@ -630,6 +789,17 @@ button:active,
     display: flex;
 
     gap: 8px;
+}
+
+.inactive-card {
+    opacity: 0.55;
+    filter: grayscale(0.6);
+    transition: 0.3s ease;
+}
+
+.inactive-card:hover {
+    opacity: 1;
+    filter: grayscale(0);
 }
 
 

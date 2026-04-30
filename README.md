@@ -25,7 +25,8 @@ Simulates a real-world electricity utility billing system capable of generating 
 - Live analytics and chart updates after data modification
 
 ### 🛠 Customer Management System
-- Add, edit or delete customer records
+- Add or edit customer records
+- Change activations status 
 - Auto-generated customer IDs
 - Form-based data handling
 
