@@ -9,11 +9,15 @@ sys.path.insert(0, str(Path(__file__).parent))
 from config import HIGH_USAGE_THRESHOLD, LOW_USAGE_THRESHOLD
 from billing import calculate_total_bill, calculate_due_date, get_days_late
 
+
 def generate_analytics(filepath):
-    
+    """Generate analytics from customer billing data."""
     # Convert relative path to absolute path based on project root
     file_path = Path(__file__).parent.parent / filepath
-    
+
+    # =========================================================
+    # INITIALIZE COUNTERS AND ACCUMULATORS
+    # =========================================================
     total_revenue = 0
     total_units = 0
     highest_bill = 0
@@ -28,36 +32,38 @@ def generate_analytics(filepath):
     all_units = []
     all_bills = []
     customer_bill_data = []
-    
-    # Initialize payment status counters
+
+    # Payment status counters
     paid_count = 0
     pending_count = 0
     paid_revenue = 0
     pending_revenue = 0
-    
-    # Initialize customer type counters
+
+    # Customer type counters
     residential_count = 0
     commercial_count = 0
     industrial_count = 0
     residential_revenue = 0
     commercial_revenue = 0
     industrial_revenue = 0
-    
-    # Initialize extreme usage and overdue counters
+
+    # Extreme usage and overdue counters
     extreme_usage_count = 0
     overdue_count = 0
 
-    # Initialize tax, discount, and penalty accumulators
+    # Tax, discount, and penalty accumulators
     total_tax_collected = 0
     total_discounts_given = 0
     total_penalties_collected = 0
 
+    # =========================================================
+    # READ AND PROCESS CUSTOMER DATA
+    # =========================================================
     with open(str(file_path), "r", encoding="utf-8-sig") as file:
-
         reader = csv.DictReader(file)
 
         for row in reader:
-            
+            # Extract customer data
             customer_id = row.get("customer_id", "").strip()
             name = row.get("customer_name", "").strip()
             billing_month = row.get("billing_month", "").strip()
@@ -65,50 +71,44 @@ def generate_analytics(filepath):
             payment_status = row.get("payment_status", "").strip()
             customer_type = row.get("customer_type", "").strip()
 
-            # ignore missing data
+            # Skip rows with missing data
             if not name or not units:
                 skipped_rows += 1
                 continue
 
-            # handle non-integer values
+            # Handle non-integer values
             try:
                 units = int(units)
             except ValueError:
                 skipped_rows += 1
                 continue
 
-            # ignore negative values
+            # Skip negative values
             if units < 0:
                 skipped_rows += 1
                 continue
 
+            # Calculate billing information
             due_date = calculate_due_date(billing_month)
-            
             days_late = get_days_late(due_date)
-
             bill = calculate_total_bill(units, days_late)
 
             bill_details = bill["bill_details"]
-
             base_bill = bill_details["bill_amount"]
-
             tax = bill_details["tax"]
-
             discount = bill_details["discount"]
-
             penalty = bill["penalty"]
 
             status = bill["status"]
-
             total_bill = bill["total_bill"]
 
-            # accumulate units and bills
+            # Accumulate units and bills
             all_units.append(units)
             all_bills.append(total_bill)
             customer_bill_data.append(
-                {"name": name, "units": units,
-                 "total_bill": total_bill}
+                {"name": name, "units": units, "total_bill": total_bill}
             )
+
             # Accumulate totals and track highest/lowest bills
             total_revenue += total_bill
             total_units += units
@@ -134,7 +134,6 @@ def generate_analytics(filepath):
             if payment_status == "Paid":
                 paid_count += 1
                 paid_revenue += total_bill
-
             elif payment_status == "Pending":
                 pending_count += 1
                 pending_revenue += total_bill
@@ -150,7 +149,7 @@ def generate_analytics(filepath):
                 industrial_count += 1
                 industrial_revenue += total_bill
 
-            # Track overdue customers            
+            # Track overdue customers
             if days_late > 0 and payment_status == "Pending":
                 overdue_count += 1
 
@@ -167,23 +166,32 @@ def generate_analytics(filepath):
             total_discounts_given += discount
             total_penalties_collected += penalty
 
-    # Calculate collection rate after loop
+    # =========================================================
+    # CALCULATE ANALYTICS METRICS
+    # =========================================================
+    # Calculate collection rate
     collection_rate = (
         (paid_revenue / total_revenue) * 100
-        if total_revenue > 0 else 0
+        if total_revenue > 0
+        else 0
     )
 
-    # Get top 5 customers after loop
+    # Get top 5 customers
     top_5_customers = sorted(
         customer_bill_data,
         key=lambda customer: customer["total_bill"],
         reverse=True
     )[:5]
 
-    average_consumption = total_units / total_customers if total_customers > 0 else 0
+    average_consumption = (
+        total_units / total_customers if total_customers > 0 else 0
+    )
     average_bill = total_revenue / total_customers if total_customers > 0 else 0
 
-    # insight based on usage
+    # =========================================================
+    # GENERATE INSIGHTS
+    # =========================================================
+    # Insight: Usage pattern
     if high_usage > low_usage and high_usage > mid_usage:
         insight1 = "Majority customers are high usage consumers."
     elif low_usage > high_usage and low_usage > mid_usage:
@@ -191,30 +199,28 @@ def generate_analytics(filepath):
     else:
         insight1 = "Majority customers are medium usage consumers."
 
-    # insight based on payment status
+    # Insight: Payment status
     if pending_count > paid_count:
         insight2 = "Most customers have pending payments."
     else:
         insight2 = "Most customers have completed payments."
 
-    # insight based on customer type revenue
+    # Insight: Customer type revenue
     revenue_map = {
         "Residential": residential_revenue,
         "Commercial": commercial_revenue,
         "Industrial": industrial_revenue
     }
-
     top_revenue_type = max(revenue_map, key=revenue_map.get)
-
     insight3 = f"{top_revenue_type} customers generate the highest revenue."
 
-    # overdue customers insight
+    # Insight: Overdue customers
     if overdue_count > 0:
         insight4 = f"There are {overdue_count} overdue customers who may require follow-up."
     else:
         insight4 = "No overdue customers at the moment."
 
-    # discount and penalty insights
+    # Insight: Discount vs Penalty
     if total_discounts_given > total_penalties_collected:
         insight5 = "The company is giving more discounts than it is collecting in penalties."
     elif total_penalties_collected > total_discounts_given:
@@ -222,19 +228,19 @@ def generate_analytics(filepath):
     else:
         insight5 = "The total discounts given and penalties collected are equal."
 
-    # tax insights
+    # Insight: Tax collected
     if total_tax_collected > 0:
         insight6 = f"The company has collected a total of ₹{total_tax_collected:.2f} in taxes."
     else:
         insight6 = "No taxes have been collected."
 
-    # invalid data insight
+    # Insight: Invalid data
     if skipped_rows > 0:
         insight7 = f"Skipped {skipped_rows} rows due to invalid or missing data."
     else:
         insight7 = "No rows were skipped due to data issues."
 
-    # collection rate insight
+    # Insight: Collection rate
     if collection_rate > 80:
         insight8 = f"The collection rate is strong at {collection_rate:.2f}%."
     elif collection_rate > 50:
@@ -242,6 +248,9 @@ def generate_analytics(filepath):
     else:
         insight8 = f"The collection rate is weak at {collection_rate:.2f}%."
 
+    # =========================================================
+    # RETURN ANALYTICS DICTIONARY
+    # =========================================================
     return {
         "total_revenue": round(total_revenue, 2),
         "highest_bill": round(highest_bill, 2),

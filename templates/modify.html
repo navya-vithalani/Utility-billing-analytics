@@ -1,19 +1,113 @@
 {% extends "base.html" %}
 
-{% block title %}Modify Customers{% endblock %}
+
+{% block title %}
+    Modify Customers
+{% endblock %}
+
 
 {% block content %}
 
-<h2 class="section-title">Modify Records</h2>
-<!-- ADD BUTTON -->
-<div class="button-container">
+<!-- ======================================== -->
+<!-- PAGE HEADER -->
+<!-- ======================================== -->
 
-    <button class="btn btn-success">
-        + Add New Customer
-    </button>
+<h2 class="section-title">
+    Customer Management
+</h2>
+
+<p class="hero-subtitle" style="text-align: center; margin-bottom: 40px;">
+    Add, edit, search, and manage customer billing records.
+</p>
+
+
+<!-- ======================================== -->
+<!-- ACTION BUTTONS -->
+<!-- ======================================== -->
+
+<div class="grid-container-4">
+
+    <!-- ADD CUSTOMER -->
+
+    <div class="button-container">
+
+        <a href="/add">
+
+            <button class="btn btn-success">
+
+                + Add New Customer
+
+            </button>
+
+        </a>
+
+    </div>
+
+
+    <!-- MODIFY LABEL -->
+
+    <div class="button-container">
+
+        <button class="btn btn-primary">
+
+            # Modify Records
+
+        </button>
+
+    </div>
 
 </div>
 
+
+<!-- ======================================== -->
+<!-- SEARCH BAR -->
+<!-- ======================================== -->
+
+<form
+    method="GET"
+    class="search-bar"
+    style="
+        margin-top: 50px;
+        margin-bottom: 50px;
+    "
+>
+
+    <!-- SEARCH INPUT -->
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search customers..."
+        class="form-input"
+    >
+
+
+    <!-- SEARCH BUTTON -->
+
+    <button
+        type="submit"
+        class="btn btn-primary"
+    >
+        Search
+    </button>
+
+
+    <!-- RESET BUTTON -->
+
+    <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="window.location.href='/modify'"
+    >
+        Reset
+    </button>
+
+</form>
+
+
+<!-- ======================================== -->
+<!-- CUSTOMER RECORD LIST -->
+<!-- ======================================== -->
 
 <div class="records-list">
 
@@ -21,22 +115,65 @@
 
     <div class="record-item">
 
+        <!-- CUSTOMER DETAILS -->
+
         <div class="record-info">
-            <p class="record-name">{{ c.customer_name }}</p>
-            <p class="record-meta">
-                {{ c.customer_id }} • {{ c.customer_type }} • {{ c.units_consumed }} units
+
+            <p class="record-name">
+
+                {{ c.customer_name }}
+
             </p>
+
+            <p class="record-meta">
+
+                {{ c.customer_id }}
+                •
+                {{ c.customer_type }}
+                •
+                {{ c.units_consumed }} units
+
+            </p>
+
         </div>
+
+
+        <!-- ACTION BUTTONS -->
 
         <div class="record-actions">
 
-            <button class="btn btn-warning">
-                Modify
-            </button>
 
-            <button class="btn btn-danger">
-                Delete
-            </button>
+            <!-- EDIT BUTTON -->
+
+            <a href="/edit/{{ c.customer_id }}">
+
+                <button class="btn btn-warning">
+
+                    Modify
+
+                </button>
+
+            </a>
+
+
+            <!-- DELETE BUTTON -->
+
+            <a
+                href="/delete/{{ c.customer_id }}"
+                onclick="
+                    return confirm(
+                        'Delete this customer? This action cannot be undone.'
+                    )
+                "
+            >
+
+                <button class="btn btn-danger">
+
+                    Delete
+
+                </button>
+
+            </a>
 
         </div>
 
@@ -46,13 +183,20 @@
 
 </div>
 
-<!-- ADD BUTTON -->
-<div class="button-container">
 
-    <button class="btn btn-success">
-        + Add New Customer
-    </button>
+<!-- ======================================== -->
+<!-- END MESSAGE -->
+<!-- ======================================== -->
 
-</div>
+<p
+    style="
+        text-align: center;
+        margin-top: 30px;
+        color: #64748b;
+        font-size: 14px;
+    "
+>
+    End of customer records.
+</p>
 
 {% endblock %}

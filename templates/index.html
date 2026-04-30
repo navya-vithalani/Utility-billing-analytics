@@ -1,54 +1,247 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+
+{% block title %}
+    Home
+{% endblock %}
+
 
 {% block content %}
 
-<!-- HERO -->
+<!-- ======================================== -->
+<!-- HERO SECTION -->
+<!-- ======================================== -->
+
 <div class="hero">
 
+    <h1 class="hero-title">
+        Smart Electricity Billing Dashboard
+    </h1>
+
     <p class="hero-subtitle">
-        Generate bills, analyse usage, and manage customers in one place.
+        A complete utility management platform built using Python,
+        Flask, CSV-based data handling, analytics processing,
+        and interactive visualisation dashboards.
     </p>
 
 </div>
 
-<!-- GRID -->
-<div class="grid-container">
 
-    <!-- INTRO CARD -->
-    <div class="card">
+<!-- ======================================== -->
+<!-- PROJECT OVERVIEW -->
+<!-- ======================================== -->
 
-        <h3 class="card-title">About the Project</h3>
+<div class="card hero-card">
 
-        <p class="card-text">
-            A simulation system that calculates electricity bills using slab rates,
-            applies tax, discounts, penalties, and generates analytics dashboards.
-        </p>
+    <h3 class="card-title">
+        Project Overview
+    </h3>
 
-        <ul class="card-list">
-            <li>Billing engine with slabs</li>
-            <li>Customer analytics</li>
-            <li>Graph visualisation</li>
-            <li>Modify & manage records</li>
-        </ul>
+    <p class="card-text">
+        This application simulates a real-world electricity
+        billing system capable of generating bills using
+        slab-based pricing logic, calculating taxes,
+        penalties, discounts, overdue payments,
+        and customer usage analytics in real time.
+    </p>
+
+    <p class="card-text">
+        The system also includes customer management
+        functionality, live dashboard analytics,
+        graphical reports, and dynamic billing
+        calculations integrated directly into
+        the web interface.
+    </p>
+
+
+    <!-- ======================================== -->
+    <!-- FEATURE GRID -->
+    <!-- ======================================== -->
+
+    <div class="feature-grid">
+
+        <!-- BILLING ENGINE -->
+
+        <div class="feature-box">
+
+            <h4>
+                ⚡ Billing Engine
+            </h4>
+
+            <p>
+                Slab-based electricity bill calculation
+                with tax, discounts, penalties,
+                and overdue tracking.
+            </p>
+
+        </div>
+
+
+        <!-- ANALYTICS -->
+
+        <div class="feature-box">
+
+            <h4>
+                📊 Analytics Dashboard
+            </h4>
+
+            <p>
+                Revenue insights, customer trends,
+                payment monitoring,
+                and usage analysis.
+            </p>
+
+        </div>
+
+
+        <!-- VISUALIZATION -->
+
+        <div class="feature-box">
+
+            <h4>
+                📈 Data Visualisation
+            </h4>
+
+            <p>
+                Automated graph generation using
+                Matplotlib for consumption
+                and revenue reporting.
+            </p>
+
+        </div>
+
+
+        <!-- CUSTOMER MANAGEMENT -->
+
+        <div class="feature-box">
+
+            <h4>
+                🛠 Customer Management
+            </h4>
+
+            <p>
+                Add, edit, search, filter,
+                and delete customer records
+                dynamically through the UI.
+            </p>
+
+        </div>
+
+
+        <!-- FLASK UI -->
+
+        <div class="feature-box">
+
+            <h4>
+                🌐 Flask Web Interface
+            </h4>
+
+            <p>
+                Multi-page responsive dashboard
+                powered by Flask templating
+                and modular backend logic.
+            </p>
+
+        </div>
+
+
+        <!-- STORAGE -->
+
+        <div class="feature-box">
+
+            <h4>
+                💾 Structured Data Handling
+            </h4>
+
+            <p>
+                CSV-based persistent storage
+                designed with future SQL
+                database scalability in mind.
+            </p>
+
+        </div>
+
+
+        <!-- LIVE UPDATES -->
+
+        <div class="feature-box">
+
+            <h4>
+                🔄 Live Dashboard Updates
+            </h4>
+
+            <p>
+                Analytics reports and charts
+                update automatically whenever
+                customer records are modified.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="feature-box">
+
+            <h4>
+                🔍 Search & Smart Filtering
+            </h4>
+
+            <p>
+                Quickly locate customer records
+                using integrated search, sorting,
+                and filtering tools built for
+                scalable utility data management.
+            </p>
+
+        </div>
 
     </div>
 
+</div>
+
+
+<!-- ======================================== -->
+<!-- DEMO BILL GENERATOR -->
+<!-- ======================================== -->
+
+<div class="card_generate">
+
+    <h3 class="card-title">
+        Demo Bill Generator
+    </h3>
+
+    <p class="card-text">
+        Enter electricity consumption details
+        to instantly generate a sample bill.
+    </p>
+
+
     <!-- BILL GENERATOR FORM -->
-    <div class="card">
 
-        <h3 class="card-title">Demo Bill Generator</h3>
+    <form
+        method="POST"
+        action="/generate-bill"
+        class="form-group"
+    >
 
-        <form method="POST" action="/generate-bill" class="form-group">
+        <div
+            class="form-grid-2"
+            style="gap: 30px;"
+        >
+
+            <!-- UNITS INPUT -->
 
             <input
                 type="number"
                 name="units"
-                placeholder="Units consumed"
+                placeholder="Units Consumed"
                 class="form-input"
                 required
             >
+
+
+            <!-- BILLING MONTH -->
 
             <input
                 type="month"
@@ -57,22 +250,104 @@
                 required
             >
 
-            <select name="customer_type" class="form-input">
+        </div>
 
-                <option>Residential</option>
-                <option>Commercial</option>
-                <option>Industrial</option>
 
-            </select>
+        <!-- SUBMIT BUTTON -->
 
-            <button class="btn btn-primary btn-full">
-                Generate Bill
-            </button>
+        <button class="btn btn-primary btn-full">
 
-        </form>
+            Generate Bill
+
+        </button>
+
+    </form>
+
+</div>
+
+
+<!-- ======================================== -->
+<!-- GENERATED BILL RESULT -->
+<!-- ======================================== -->
+
+{% if bill %}
+
+<div
+    class="card"
+    style="
+        background-color: #ecfdf5;
+        border-left: 6px solid #16a34a;
+        margin-top: 30px;
+        margin-left: 40%;
+        margin-right: 40%
+    "
+>
+
+    <h2
+        class="section-title"
+        style="color: #16a34a;"
+    >
+        Bill Generated Successfully
+    </h2>
+
+
+    <!-- BILL DETAILS -->
+
+    <div class="bill-details">
+
+        <p class="card-text">
+            <strong>Energy Charge:</strong>
+            ₹{{ energy_charge }}
+        </p>
+
+        <p class="card-text">
+            <strong>Fixed Charge:</strong>
+            ₹{{ fixed_charge }}
+        </p>
+
+        <p class="card-text">
+            <strong>Tax:</strong>
+            ₹{{ tax }}
+        </p>
+
+        <p class="card-text">
+            <strong>Discount:</strong>
+            ₹{{ discount }}
+        </p>
+
+        <p class="card-text">
+            <strong>Penalty:</strong>
+            ₹{{ penalty }}
+        </p>
+
+        <p class="card-text">
+            <strong>Due Date:</strong>
+            {{ due_date }}
+        </p>
+
+        <p class="card-text">
+            <strong>Days Late:</strong>
+            {{ days_late }}
+        </p>
 
     </div>
 
+
+    <!-- TOTAL BILL -->
+
+    <p
+        style="
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-top: 20px;
+        "
+    >
+        Total Bill: ₹{{ bill }}
+    </p>
+
 </div>
+
+{% endif %}
 
 {% endblock %}

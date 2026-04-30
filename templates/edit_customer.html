@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Edit Customer
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ======================================== -->
+<!-- PAGE TITLE -->
+<!-- ======================================== -->
+
+<h2 class="section-title">
+    Edit Customer
+</h2>
+
+
+<!-- ======================================== -->
+<!-- EDIT CUSTOMER FORM -->
+<!-- ======================================== -->
+
+<div class="card">
+
+    <form method="POST">
+
+        <div class="form-group">
+
+            <!-- CUSTOMER ID -->
+
+            <label>
+                Customer ID
+            </label>
+
+            <input
+                type="text"
+                value="{{ customer.customer_id }}"
+                disabled
+            >
+
+
+            <!-- CUSTOMER NAME -->
+
+            <label>
+                Customer Name
+            </label>
+
+            <input
+                type="text"
+                name="customer_name"
+                value="{{ customer.customer_name }}"
+                required
+            >
+
+
+            <!-- CUSTOMER TYPE -->
+
+            <label>
+                Customer Type
+            </label>
+
+            <select name="customer_type">
+
+                <option value="Residential">
+                    Residential
+                </option>
+
+                <option value="Commercial">
+                    Commercial
+                </option>
+
+                <option value="Industrial">
+                    Industrial
+                </option>
+
+            </select>
+
+
+            <!-- UNITS CONSUMED -->
+
+            <label>
+                Units Consumed
+            </label>
+
+            <input
+                type="number"
+                name="units_consumed"
+                value="{{ customer.units_consumed }}"
+                required
+            >
+
+
+            <!-- BILLING MONTH -->
+
+            <label>
+                Billing Month
+            </label>
+
+            <input
+                type="month"
+                name="billing_month"
+                value="{{ customer.billing_month }}"
+                required
+            >
+
+
+            <!-- PAYMENT STATUS -->
+
+            <label>
+                Payment Status
+            </label>
+
+            <select name="payment_status">
+
+                <option value="Paid">
+                    Paid
+                </option>
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+            </select>
+
+
+            <!-- SUBMIT BUTTON -->
+
+            <button
+                type="submit"
+                class="btn btn-success"
+            >
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

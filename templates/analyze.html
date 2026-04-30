@@ -1,64 +1,253 @@
 {% extends "base.html" %}
 
-{% block title %}Analytics{% endblock %}
+
+{% block title %}
+    Analytics
+{% endblock %}
+
 
 {% block content %}
 
-<h2 class="section-title">Analytics Dashboard</h2>
+<!-- ======================================== -->
+<!-- PAGE TITLE -->
+<!-- ======================================== -->
+
+<h2 class="section-title">
+    Analytics Dashboard
+</h2>
+
+
+<!-- ======================================== -->
+<!-- KEY METRICS SECTION -->
+<!-- ======================================== -->
+
+<h3 class="section-subtitle">
+    Key Metrics
+</h3>
+
+<div class="stats-grid">
+
+    <!-- TOTAL REVENUE -->
+
+    <div class="stat-card">
+        <h3>₹{{ analytics.total_revenue }}</h3>
+        <p>Total Revenue</p>
+    </div>
+
+
+    <!-- TOTAL CUSTOMERS -->
+
+    <div class="stat-card">
+        <h3>{{ analytics.total_customers }}</h3>
+        <p>Total Customers</p>
+    </div>
+
+
+    <!-- PENDING BILLS -->
+
+    <div class="stat-card">
+        <h3>{{ analytics.pending_count }}</h3>
+        <p>Pending Bills</p>
+    </div>
+
+
+    <!-- AVERAGE BILL -->
+
+    <div class="stat-card">
+        <h3>₹{{ analytics.average_bill }}</h3>
+        <p>Average Bill</p>
+    </div>
+
+</div>
+
+
+<!-- ======================================== -->
+<!-- SYSTEM INSIGHTS SECTION -->
+<!-- ======================================== -->
+
+<div class="stat-card insights-card">
+
+    <h2>
+        System Insights
+    </h2>
+
+    <ul>
+
+        <li>{{ analytics.insight1 }}</li>
+        <li>{{ analytics.insight2 }}</li>
+        <li>{{ analytics.insight3 }}</li>
+        <li>{{ analytics.insight4 }}</li>
+        <li>{{ analytics.insight5 }}</li>
+        <li>{{ analytics.insight6 }}</li>
+        <li>{{ analytics.insight7 }}</li>
+        <li>{{ analytics.insight8 }}</li>
+
+    </ul>
+
+</div>
+
+
+<!-- ======================================== -->
+<!-- VISUAL ANALYTICS SECTION -->
+<!-- ======================================== -->
+
+<h3
+    class="section-subtitle"
+    style="margin-top: 70px"
+>
+    Visual Analytics
+</h3>
+
 
 <div class="grid-container-4">
 
     <div class="charts">
 
+        <!-- UNITS VS BILL -->
 
-    <div class="card">
-        <h3 class="card-title-sm">Units vs Total Bill</h3>
-        <img src="/static/charts/units_vs_bill.png" class="card-image">
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Units vs Total Bill
+            </h3>
+
+            <img
+                src="/static/charts/units_vs_bill.png"
+                class="card-image"
+            >
+
+        </div>
+
+
+        <!-- TOP 5 CUSTOMERS -->
+
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Top 5 Highest Paying Customers
+            </h3>
+
+            <img
+                src="/static/charts/top_5_customers.png"
+                class="card-image"
+            >
+
+        </div>
+
+
+        <!-- REVENUE BY TYPE -->
+
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Revenue by Customer Type
+            </h3>
+
+            <img
+                src="/static/charts/revenue_by_type.png"
+                class="card-image"
+            >
+
+        </div>
+
+
+        <!-- CUSTOMER DISTRIBUTION -->
+
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Customer Type Distribution
+            </h3>
+
+            <img
+                src="/static/charts/customer_distribution.png"
+                class="card-image"
+            >
+
+        </div>
+
+
+        <!-- PAYMENT STATUS -->
+
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Payment Status Overview
+            </h3>
+
+            <img
+                src="/static/charts/payment_status.png"
+                class="card-image"
+            >
+
+        </div>
+
+
+        <!-- USAGE DISTRIBUTION -->
+
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Usage Distribution
+            </h3>
+
+            <img
+                src="/static/charts/usage_distribution.png"
+                class="card-image"
+            >
+
+        </div>
+
+
+        <!-- PAID VS PENDING -->
+
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Paid vs Pending Revenue
+            </h3>
+
+            <img
+                src="/static/charts/paid_vs_pending_revenue.png"
+                class="card-image"
+            >
+
+        </div>
+
+
+        <!-- FINANCE OVERVIEW -->
+
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Finance Overview
+                (Tax, Discount, Penalty)
+            </h3>
+
+            <img
+                src="/static/charts/finance_overview.png"
+                class="card-image"
+            >
+
+        </div>
+
+
+        <!-- REVENUE SHARE -->
+
+        <div class="card">
+
+            <h3 class="card-title-sm">
+                Revenue Share by Type
+            </h3>
+
+            <img
+                src="/static/charts/revenue_share.png"
+                class="card-image"
+            >
+
+        </div>
+
     </div>
-
-    <div class="card">
-        <h3 class="card-title-sm">Top 5 Highest Paying Customers</h3>
-        <img src="/static/charts/top_5_customers.png" class="card-image">
-    </div>
-
-    <div class="card">
-        <h3 class="card-title-sm">Revenue by Customer Type</h3>
-        <img src="/static/charts/revenue_by_type.png" class="card-image">
-    </div>
-
-    <div class="card">
-        <h3 class="card-title-sm">Customer Type Distribution</h3>
-        <img src="/static/charts/customer_distribution.png" class="card-image">
-    </div>
-
-    <div class="card">
-        <h3 class="card-title-sm">Payment Status Overview</h3>
-        <img src="/static/charts/payment_status.png" class="card-image">
-    </div>
-
-    <div class="card">
-        <h3 class="card-title-sm">Usage Distribution</h3>
-        <img src="/static/charts/usage_distribution.png" class="card-image">
-    </div>
-
-    <div class="card">
-        <h3 class="card-title-sm">Paid vs Pending Revenue</h3>
-        <img src="/static/charts/paid_vs_pending_revenue.png" class="card-image">
-    </div>
-
-    <div class="card">
-        <h3 class="card-title-sm">Finance Overview (Tax, Discount, Penalty)</h3>
-        <img src="/static/charts/finance_overview.png" class="card-image">
-    </div>
-
-    <div class="card">
-        <h3 class="card-title-sm">Revenue Share by Type</h3>
-        <img src="/static/charts/revenue_share.png" class="card-image">
-    </div>
-
-    
-</div>
-
 
 </div>
 

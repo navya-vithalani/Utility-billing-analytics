@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Add Customer
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ======================================== -->
+<!-- PAGE TITLE -->
+<!-- ======================================== -->
+
+<h2 class="section-title">
+    Add New Customer
+</h2>
+
+
+<!-- ======================================== -->
+<!-- ADD CUSTOMER FORM CARD -->
+<!-- ======================================== -->
+
+<div class="card">
+
+    <form method="POST">
+
+        <div class="form-group">
+
+            <!-- AUTO-GENERATED CUSTOMER ID -->
+
+            <input
+                type="text"
+                name="customer_id"
+                value="{{ new_customer_id }}"
+                disabled
+            >
+
+
+            <!-- CUSTOMER NAME -->
+
+            <input
+                type="text"
+                name="customer_name"
+                placeholder="Customer Name"
+                required
+            >
+
+
+            <!-- BILLING MONTH -->
+
+            <input
+                type="month"
+                name="billing_month"
+                required
+            >
+
+
+            <!-- UNITS CONSUMED -->
+
+            <input
+                type="number"
+                name="units_consumed"
+                placeholder="Units Consumed"
+                required
+            >
+
+
+            <!-- PAYMENT STATUS -->
+
+            <select name="payment_status">
+
+                <option value="Paid">
+                    Paid
+                </option>
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+            </select>
+
+
+            <!-- CUSTOMER TYPE -->
+
+            <select name="customer_type">
+
+                <option value="Residential">
+                    Residential
+                </option>
+
+                <option value="Commercial">
+                    Commercial
+                </option>
+
+                <option value="Industrial">
+                    Industrial
+                </option>
+
+            </select>
+
+
+            <!-- SUBMIT BUTTON -->
+
+            <button
+                type="submit"
+                class="btn btn-success"
+            >
+                Add Customer
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

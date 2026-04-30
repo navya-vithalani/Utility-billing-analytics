@@ -1,12 +1,9 @@
-customer_id,customer_name,billing_month,units_consumed,payment_status,customer_type
-100001,Aarav Sharma,2026-03,92,Paid,Residential
-100002,Rahul Verma,2026-03,145,Pending,Residential
-100003,Sneha Kapoor,2026-03,78,Paid,Residential
-100004,Ishita Rao,2026-03,310,Pending,Commercial
-100005,Dev Malhotra,2026-03,540,Paid,Industrial
+﻿customer_id,customer_name,billing_month,units_consumed,payment_status,customer_type
+100002,Rahul Verma,2026-03,145,Paid,Residential
+100004,Ishita Rao,2026-03,310,Pending,Residential
+100005,Dev Malhotra,2026-03,547,Paid,Residential
 100006,Karan Mehta,2026-03,126,Paid,Residential
 100007,Ananya Reddy,2026-03,410,Pending,Commercial
-100003,Vihaan Nair,2026-03,690,Paid,Industrial
 100009,Ritika Sen,2026-03,84,Paid,Residential
 100010,Arjun Pillai,2026-03,268,Pending,Commercial
 100011,Niharika Das,2026-03,112,Paid,Residential
@@ -74,3 +71,7 @@ customer_id,customer_name,billing_month,units_consumed,payment_status,customer_t
 100073,Mitali Das,2026-03,134,Paid,Residential
 100074,Parth Sharma,2026-03,341,Paid,Commercial
 100075,Diya Suresh,2026-03,69,Paid,Residential
+100078,Hadya Kumari,2026-03,93,Paid,Residential
+100079,Sanjana Sharma,2026-06,1000,Paid,Residential
+10080,Aarav Sharma,2026-03,936,Pending,Residential
+10079,Vihaan Nair,2026-03,678,Pending,Residential

@@ -1,30 +1,240 @@
 {% extends "base.html" %}
 
-{% block title %}View Customers{% endblock %}
-<body class="view-page">
+
+{% block title %}
+    View Customers
+{% endblock %}
+
+
 {% block content %}
 
-<h2>Customer Records</h2>
+<!-- ======================================== -->
+<!-- PAGE TITLE -->
+<!-- ======================================== -->
 
-<table class="data-table">
+<h2 class="section-title">
+    Customer Records
+</h2>
+
+<p
+    class="hero-subtitle"
+    style="text-align: center; margin-bottom: 40px;"
+>
+    Search, filter, and explore utility billing records.
+</p>
+
+
+<!-- ======================================== -->
+<!-- SEARCH & FILTER CARD -->
+<!-- ======================================== -->
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h3 class="card-title-sm">
+            Search & Filter
+        </h3>
+
+    </div>
+
+
+    <!-- SEARCH FORM -->
+
+    <form
+        method="GET"
+        class="grid form-grid-3"
+        style="
+            gap: 20px;
+            padding: 20px;
+        "
+    >
+
+        <!-- SEARCH INPUT -->
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search by customer name or ID"
+            class="form-input"
+        >
+
+
+        <!-- CUSTOMER TYPE FILTER -->
+
+        <select
+            name="type"
+            class="form-input"
+        >
+
+            <option value="">
+                All Types
+            </option>
+
+            <option value="Residential">
+                Residential
+            </option>
+
+            <option value="Commercial">
+                Commercial
+            </option>
+
+            <option value="Industrial">
+                Industrial
+            </option>
+
+        </select>
+
+
+        <!-- SORT OPTION -->
+
+        <select
+            name="sort"
+            class="form-input"
+        >
+
+            <option value="">
+                Sort By
+            </option>
+
+            <option value="name">
+                Name
+            </option>
+
+            <option value="units">
+                Highest Units
+            </option>
+
+        </select>
+
+
+        <!-- ACTION BUTTONS -->
+
+        <div
+            style="
+                display: flex;
+                gap: 10px;
+                margin-top: 10px;
+            "
+        >
+
+            <!-- APPLY BUTTON -->
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Apply
+            </button>
+
+
+            <!-- RESET BUTTON -->
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="window.location.href='/view'"
+            >
+                Reset
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- ======================================== -->
+<!-- CUSTOMER TABLE -->
+<!-- ======================================== -->
+
+<table
+    class="data-table"
+    style="margin-top: 50px;"
+>
+
+    <!-- TABLE HEADERS -->
+
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Units</th>
-        <th>Status</th>
-        <th>Type</th>
+
+        <th>
+            ID
+        </th>
+
+        <th>
+            Name
+        </th>
+
+        <th>
+            Billing Month
+        </th>
+
+        <th>
+            Units
+        </th>
+
+        <th>
+            Payment Status
+        </th>
+
+        <th>
+            Customer Type
+        </th>
+
     </tr>
+
+
+    <!-- TABLE DATA -->
 
     {% for c in customers %}
+
     <tr>
-        <td>{{ c.customer_id }}</td>
-        <td>{{ c.customer_name }}</td>
-        <td>{{ c.units_consumed }}</td>
-        <td>{{ c.payment_status }}</td>
-        <td>{{ c.customer_type }}</td>
+
+        <td>
+            {{ c.customer_id }}
+        </td>
+
+        <td>
+            {{ c.customer_name }}
+        </td>
+
+        <td>
+            {{ c.billing_month }}
+        </td>
+
+        <td>
+            {{ c.units_consumed }}
+        </td>
+
+        <td>
+            {{ c.payment_status }}
+        </td>
+
+        <td>
+            {{ c.customer_type }}
+        </td>
+
     </tr>
+
     {% endfor %}
+
 </table>
 
+
+<!-- ======================================== -->
+<!-- END MESSAGE -->
+<!-- ======================================== -->
+
+<p
+    style="
+        text-align: center;
+        margin-top: 25px;
+        color: #64748b;
+        font-size: 14px;
+    "
+>
+    Showing all available customer records.
+</p>
+
 {% endblock %}
-</body>

@@ -1,35 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Billing System{% endblock %}</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<html lang="en">
+
+<head>
+
+    <!-- ======================================== -->
+    <!-- META DATA -->
+    <!-- ======================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+
+    <!-- ======================================== -->
+    <!-- PAGE TITLE -->
+    <!-- ======================================== -->
+
+    <title>
+        {% block title %}
+            Billing System
+        {% endblock %}
+    </title>
+
+
+    <!-- ======================================== -->
+    <!-- STYLESHEET -->
+    <!-- ======================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles.css') }}"
+    >
+
+
+    <!-- ======================================== -->
+    <!-- GOOGLE FONTS -->
+    <!-- ======================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
 </head>
+
 
 <body>
 
-<header class="header">
+    <!-- ======================================== -->
+    <!-- HEADER -->
+    <!-- ======================================== -->
 
-    <a href="/" class="logo">⚡ UTILITY BILLING SYSTEM ⚡</a>
+    <header class="header">
 
-    <p class="subtitle">Analytics • Billing • Management Dashboard</p>
+        <a
+            href="/"
+            class="logo"
+        >
+            ⚡ UTILITY BILLING SYSTEM ⚡
+        </a>
 
-</header>
+        <p class="subtitle">
+            Analytics • Billing • Management Dashboard
+        </p>
 
-<nav class="nav">
+    </header>
 
-    <a href="/view">View</a>
-    <a href="/analyze">Analyse</a>
-    <a href="/modify">Modify</a>
 
-</nav>
+    <!-- ======================================== -->
+    <!-- NAVIGATION BAR -->
+    <!-- ======================================== -->
 
-<main class="container">
+    <nav class="nav">
 
-    {% block content %}{% endblock %}
+        <a href="/view">
+            View
+        </a>
 
-</main>
+        <a href="/analyze">
+            Analyse
+        </a>
+
+        <a href="/modify">
+            Modify
+        </a>
+
+    </nav>
+
+
+    <!-- ======================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ======================================== -->
+
+    <main class="container">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- ======================================== -->
+    <!-- FOOTER -->
+    <!-- ======================================== -->
+
+    <footer class="footer">
+
+        <p>
+            &copy; 2026 Utility Billing System
+            • Built using Flask, Python, and Matplotlib
+        </p>
+
+    </footer>
 
 </body>
+
 </html>

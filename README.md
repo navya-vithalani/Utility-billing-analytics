@@ -1,74 +1,116 @@
-# Utility Billing Analytics - Version 9
+# ⚡ Utility Billing Analytics System
 
-## Objective
-Modular python-based Flask web application for Utility Billing management and analysis. Modular structure with nirtual environment setup.
+## 📌 Objective
 
-## Features
-- Multi-column csv file to get varied data
-- Reads customer data from CSV file, calculates bill, tax, discount, and penalty
-- Modular code structure (separation of logic, config, and execution)
-- A multi-page Flask webapp with universal styles
-- virtual environment for managing dependencies
+Simulates a real-world electricity utility billing system capable of generating bills, managing customer records, analysing consumption patterns, and visualising billing insights through an interactive web dashboard. Developed using Python and Flask.
 
-## Configuration
+---
 
-### Slab Rates
+## ✨ Features
 
-- 0-100 units → ₹5/unit
-- 101-300 units → ₹7/unit
-- Above 300 units → ₹10/unit
+### ⚡ Smart Billing Engine
+- Slab-based electricity bill calculation
+- Fixed charge implementation
+- Tax, discount, and penalty calculation
+- Due-date and late-payment handling
 
-### Fixed Charge
+### 🌐 Interactive Flask Web Application
+- Multi-page Flask dashboard
+- Responsive and modern UI design
+- Search, sort and filter functionality
 
-- ₹100 (added to every bill)
+### 📊 Analytics & Visualisation
+- Automated graph generation using Matplotlib
+- Revenue and customer analysis dashboards
+- Live analytics and chart updates after data modification
 
-### Discount
+### 🛠 Customer Management System
+- Add, edit or delete customer records
+- Auto-generated customer IDs
+- Form-based data handling
 
-- 10% for a bill of less than ₹2000
+### 💾 Structured Data Handling
+- CSV-based persistent storage
+- Modular file organization
 
-### taxes
+---
 
-- 18% above ₹1000
-- 5% below ₹1000
+## 🛠 Technologies Used
 
-### Penalty
+Python | Flask | HTML5 | CSS3 | Matplotlib | CSV File Handling | Git & GitHub
 
-- 2% of bill amount per day after 15th of next month(due date)
-- Max penalty of ₹500
+---
 
-## Data Storage
+## 📂 Project Structure
 
-Customer data is stored in a CSV file with the following fields:
+```bash
+Utility-Billing-System/
+│
+├── app.py
+├── config.py
+├── data/
+│   └── customers.csv
+├── src/
+│   ├── billing.py
+│   ├── analytics.py
+│   ├── visualisations.py
+│   └── utils.py
+├── static/
+│   ├── charts/
+│   ├── images/
+│   └── styles.css
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── view.html
+│   ├── analyze.html
+│   └── modify.html
+└── README.md
 
-- Customer id
-- Customer Name
-- Billing month
-- Units Consumed
-- Payment Status
-- Customer type
+```
+## 📸 Output Screens
 
-## Modules & Files
+### 🏠 Landing Page
+![Landing Page](static/images/landing-page.png)
 
-- src → handles logic and reusable code. Contains billing.py(calculation), analytics.py(to generate analysis) and utils.py(helper functions)
-- data → contains csv and text files to be used for analysis
-- templates → carries html files to display on webapp
-- static → stores reports and images to used on webapp
-- config.py → stores constant values like rates and slabs
-- app.py → flow of the app which runs the final output
-- venv → handles virtual environment setup to manage dependencies
-- .gitignore → to prevent Git from tracking, staging, or committing unnecessary files—like logs, build artifacts, or secret keys—keeping the repository clean and secure.
+---
 
-## Sample Output
+### ⚡ Bill Generation
+![Bill Generation](static/images/bill-generation.png)
 
+---
 
-### Landing Page
-![Landing page](static/images/landing-page.png)
+### 📋 View Tab
+![View Tab](static/images/view-tab.png)
 
-### View Tab
-![View tab](static/images/view-tab.png)
+---
 
-### Analyze Tab
-![Analyze tab](static/images/analyze-tab.png)
+### 📊 Analytics Dashboard - Overview
+![Analytics Dashboard](static/images/analytics-dashboard-1.png)
 
-### Modify Tab
-![Modify tab](static/images/modify-tab.png)
+---
+
+### 📈 Analytics Dashboard - Visualisations
+![Analytics Visualisations](static/images/analytics-dashboard-2.png)
+
+---
+
+### 🛠 Modify Customers
+![Modify Customers](static/images/modify-tab.png)
+
+---
+
+### ✏ Edit Customer
+![Edit Customer](static/images/edit-customer.png)
+
+---
+
+### ➕ Add Customer
+![Add Customer](static/images/add-customer.png)
+
+---
+
+## 👩‍💻 Developed By
+
+**Navya K. Vithalani**  
+Internship Project — Abjayon
